@@ -9,8 +9,8 @@ import {Promise} from 'es6-promise';
 import * as webdriver from 'selenium-webdriver';
 import * as chrome from 'selenium-webdriver/chrome';
 
-var chromeDriverPath = require('selenium-binaries').chromedriver;
-process.env.CHROME_DRIVER_PATH = chromeDriverPath;
+import {chromedriver} from 'selenium-binaries';
+process.env.CHROME_DRIVER_PATH = chromedriver;
 
 // Shorten the names we'll use a lot
 const By = webdriver.By,
