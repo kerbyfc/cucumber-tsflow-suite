@@ -13,8 +13,8 @@ import {chromedriver} from 'selenium-binaries';
 process.env.CHROME_DRIVER_PATH = chromedriver;
 
 // Shorten the names we'll use a lot
-const By = webdriver.By,
-    until = webdriver.until;
+const By = webdriver.By;
+const until = webdriver.until;
 
 // Configure WebDriver. Nothing async yet.
 // Could also move into next function no problem.
