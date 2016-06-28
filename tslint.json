@@ -10,6 +10,7 @@
       true,
       "single"
     ],
+    "no-console": false,
     "no-unused-expression": true,
     "no-unused-variable": [
       true, 
