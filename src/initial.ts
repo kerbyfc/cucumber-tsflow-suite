@@ -1,4 +1,5 @@
-/// <reference path="../typings/index.d.ts" />
+import '../typings/index.d.ts';
+import '../typings/custom/index.d.ts';
 
 import WebElement = webdriver.WebElement;
 import 'babel-core/register';
