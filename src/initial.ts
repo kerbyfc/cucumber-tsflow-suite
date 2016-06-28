@@ -1,21 +1,20 @@
 import '../typings/index.d.ts';
 import '../typings/custom/index.d.ts';
 
-import WebElement = webdriver.WebElement;
 import 'babel-core/register';
 import 'babel-polyfill';
 
 import {Promise} from 'es6-promise';
 
-import * as webdriver from 'selenium-webdriver';
-import * as chrome from 'selenium-webdriver/chrome';
+import {
+  By,
+  WebElement,
+  until
+} from 'selenium-webdriver';
 
 import {chromedriver} from 'selenium-binaries';
 process.env.CHROME_DRIVER_PATH = chromedriver;
 
-// Shorten the names we'll use a lot
-const By = webdriver.By;
-const until = webdriver.until;
 
 // Configure WebDriver. Nothing async yet.
 // Could also move into next function no problem.
