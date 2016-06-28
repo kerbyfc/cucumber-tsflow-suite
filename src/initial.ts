@@ -15,9 +15,6 @@ import {
 import {chromedriver} from 'selenium-binaries';
 process.env.CHROME_DRIVER_PATH = chromedriver;
 
-
-// Configure WebDriver. Nothing async yet.
-// Could also move into next function no problem.
 const driver = new webdriver.Builder()
     .withCapabilities(webdriver.Capabilities.chrome())
     .build();
