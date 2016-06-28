@@ -2,5 +2,8 @@
   "globalDependencies": {
     "node": "registry:dt/node#6.0.0+20160621231320",
     "selenium-webdriver": "registry:dt/selenium-webdriver#2.44.0+20160317120654"
+  },
+  "dependencies": {
+    "es6-promise": "registry:npm/es6-promise#3.0.0+20160211003958"
   }
 }
