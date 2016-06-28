@@ -9,16 +9,25 @@ gulp.task('ts-babel', function () {
  
     // The `base` part is needed so
     //  that `dest()` doesnt map folders correctly after rename
-    return gulp.src('app/**/*.ts', { base: './' })
+    return gulp.src('src/**/*.ts', { base: 'src' })
         .pipe(ts(tsProject))
         .pipe(babel({
-            optional: ['runtime']
+            presets: ['es2015', 'stage-0']
         }))
         .pipe(rename(function (path) {
             path.extname = '.js';
         }))
-        .pipe(gulp.dest('.'));
+        .pipe(gulp.dest('build'));
 });
+
+gulp.task('watch', function () {
+    gulp.watch(['src/**/*.ts'], ['ts-babel'])
+})
+
+gulp.task('dev', [
+    'ts-babel',
+    'watch'
+]);
 
 gulp.task('default', [
     'ts-babel'
