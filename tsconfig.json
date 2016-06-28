@@ -1,8 +1,10 @@
 {
     "compilerOptions": {
         "target": "ES6",
+        "module": "system",
         "experimentalDecorators": true,
-        "emitDecoratorMetadata": true
+        "emitDecoratorMetadata": true,
+        "outFile": "build/bundle.js"
     },
     "exclude": [
         "node_modules"
