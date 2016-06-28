@@ -1,0 +1,1 @@
+/// <reference path="selenium-binaries.d.ts" />
