@@ -5,7 +5,7 @@ var rename = require('gulp-rename');
 var del = require('del');
 var plumber = require('gulp-plumber');
  
-gulp.task('ts-babel', function () {
+gulp.task('ts-babel', ['cleanup'], function () {
     // Using my existing tsconfig.json file
     var tsProject = ts.createProject(__dirname + '/tsconfig.json');
  
