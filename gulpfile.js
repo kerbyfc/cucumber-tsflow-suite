@@ -21,6 +21,10 @@ gulp.task('ts-babel', function () {
         .pipe(gulp.dest('build'));
 });
 
+gulp.task('cleanup', function() {
+    return del('build');
+});
+
 gulp.task('watch', function () {
     gulp.watch(['src/**/*.ts'], ['ts-babel'])
 })
