@@ -19,6 +19,7 @@
     "babel-runtime": "^6.9.2",
     "cucumber": "^1.2.0",
     "cucumber-tsflow": "^1.1.1",
+    "del": "^2.2.1",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-rename": "^1.2.2",

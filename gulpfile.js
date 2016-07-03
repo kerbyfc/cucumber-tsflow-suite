@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var ts = require('gulp-typescript');
 var babel = require('gulp-babel');
 var rename = require('gulp-rename');
+var del = require('del');
  
 gulp.task('ts-babel', function () {
     // Using my existing tsconfig.json file
