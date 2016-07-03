@@ -3,6 +3,7 @@ var ts = require('gulp-typescript');
 var babel = require('gulp-babel');
 var rename = require('gulp-rename');
 var del = require('del');
+var plumber = require('gulp-plumber');
  
 gulp.task('ts-babel', function () {
     // Using my existing tsconfig.json file
@@ -11,6 +12,7 @@ gulp.task('ts-babel', function () {
     // The `base` part is needed so
     //  that `dest()` doesnt map folders correctly after rename
     return gulp.src('src/**/*.ts', { base: 'src' })
+        .pipe(plumber())
         .pipe(ts(tsProject))
         .pipe(babel({
             presets: ['es2015', 'stage-0']
