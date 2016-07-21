@@ -11,6 +11,7 @@
       true,
       "single"
     ],
+    "no-reference": false,
     "trailing-comma": [
       true,
       {"multiline": "never", "singleline": "never"}

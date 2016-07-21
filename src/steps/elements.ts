@@ -1,6 +1,7 @@
+///<reference path="../../typings/custom/index.d.ts" />
+
 'use strict';
 
-import '../../typings/custom/index.d.ts';
 import 'string_score';
 import {
     binding,

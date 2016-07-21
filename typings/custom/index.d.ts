@@ -1,6 +1,7 @@
-import '../index.d.ts';
-import './score.d.ts';
-import './table.d.ts';
-import './tmp.d.ts';
-import './selenium-binaries.d.ts';
+///<reference path="../index.d.ts" />
+///<reference path="./score.d.ts" />
+///<reference path="./table.d.ts" />
+///<reference path="./tmp.d.ts" />
+///<reference path="./selenium-binaries.d.ts" />
+
 
