@@ -1,19 +1,23 @@
-"use strict";
+'use strict';
 
-import "string_score";
-import {binding, given} from "cucumber-tsflow";
-import {driver} from "../support/driver";
-import * as _ from "lodash";
+import '../../typings/custom/index.d.ts';
+import 'string_score';
+import {
+    binding,
+    given
+} from 'cucumber-tsflow';
+
+import {driver} from '../support/driver';
+import * as _ from 'lodash';
 
 import
 {
     By,
-    WebElement,
     promise,
-} from "selenium-webdriver";
+    WebElement
+} from 'selenium-webdriver';
 
 import Promise = promise.Promise;
-import {resolve} from "url";
 
 /**
  * Поддержка операций с элементами
@@ -33,7 +37,7 @@ class Elements {
         await this.doClick(selector);
     }
 
-    @given(/^попробовать кликнуть на "([^"]*)"$/)
+    @given(/^попробовать кликнуть на '([^']*)'$/)
     public async tryClick(selector: string): Promise<void> {
         await this.doClick(selector, false);
     }
@@ -42,7 +46,7 @@ class Elements {
      * @param selector
      * @param value
      */
-    @given(/^заполнить поле "([^"]*)" значением "([^"]*)"$/)
+    @given(/^заполнить поле '([^']*)' значением '([^']*)'$/)
     public async fillInput(selector: string, value: string): Promise<void> {
         const input: WebElement = await this.getElement(selector);
         await driver.actions()
@@ -51,7 +55,7 @@ class Elements {
             .perform();
     }
 
-    @given(/^содержимое (.*) должно быть "([^"]*)"$/)
+    @given(/^содержимое (.*) должно быть '([^']*)'$/)
     public async checkElementInnerHtml(selector: string, expectedHtml: string): Promise<void> {
         /**
          * Находим элемент и получаем его содержимое
@@ -98,7 +102,7 @@ class Elements {
                  *  Кидаем ошибку если нет элемента
                  */
                 if (strict && !elements.length) {
-                    throw new Error(`Элемент(ы) "${selector}" не найден(ы) на странице`);
+                    throw new Error(`Элемент(ы) '${selector}' не найден(ы) на странице`);
                 }
                 /**
                  * Возвращаем элементы
@@ -136,12 +140,12 @@ class Elements {
 
         let score: number = pairs[0][2];
         if (score < 0.2) {
-            throw new Error(`Используемое имя элемента "${name}" неочевидно`);
+            throw new Error(`Используемое имя элемента '${name}' неочевидно`);
         }
 
         if (pairs.length > 1 && score.toFixed(1) === pairs[1][2].toFixed(1)) {
             throw new Error(
-                `Используемое имя элемента "${name}" неоднозначно, 
+                `Используемое имя элемента '${name}' неоднозначно, 
                 как и ${pairs[1][0]}`
             );
         }

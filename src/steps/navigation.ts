@@ -1,6 +1,6 @@
-import * as webdriver from "selenium-webdriver";
-import {binding, given} from "cucumber-tsflow/dist/index";
-import {driver} from "../support/driver";
+import * as webdriver from 'selenium-webdriver';
+import {binding, given} from 'cucumber-tsflow/dist/index';
+import {driver} from '../support/driver';
 import Promise = webdriver.promise.Promise;
 
 @binding()
