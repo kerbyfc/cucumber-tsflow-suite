@@ -1,15 +1,15 @@
 #### Installation
 
-```npm i```
+`npm i`
 
 #### Developing
 
-```gulp dev```
+`gulp dev`
 
 #### Generate steps dictionary documentation
 
-```gulp gendoc```
+`gulp gendoc`
 
 #### Run tests
 
-```npm test```
+`npm test`
