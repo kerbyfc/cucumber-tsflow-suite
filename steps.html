@@ -1,0 +1,261 @@
+
+    <html>
+      <head>
+        <title>
+          Step Dictionary
+        </title>
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+        <style>
+          
+    #filter {
+      width: 100%;
+      font-size: 18pt;
+      padding: 10px;
+      background-color: #F0F0F0;
+      border: 1px solid #CCC;
+      color: #0088B5;
+    }
+    .filename-header {
+      font-size: 13pt;
+    }
+    .step-defintion {
+      padding: 20px 5px;
+    }
+    .label {
+      color: #000;
+    }
+    .form-group, .controls, .footer {
+      padding: 20px 0;
+    }
+    .fileToggleButton {
+      float: left;
+      position: relative;
+      margin-right: 10px;
+      border: 1px solid #CCC;
+      background-color: #FFF;
+      font-size: 8pt;
+      color: #AAA;
+    }
+    .fileToggleButton:hover {
+      border: 1px solid #777;
+      color: #333;
+    }
+    .footer {
+      font-size: 10pt;
+    }
+  
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          
+    <h1> Step Dictionary </h1>
+    <div class="form-group">
+      <label for="filter">Search by phrase</label>
+      <input type="text" id="filter" placeholder="">
+    </div>
+  
+          
+    <div class="controls">
+      Available step definitions (9):
+      <a href="javascript:toggleAll('collapse')" id="toggleAll"> Collapse All </a>
+    </div>
+    
+      <div class="file-block">
+        <input type="button" class="fileToggleButton" onClick="toggleDefinitions(this)" value="Toggle">
+        <p class="filename-header">
+          src/definitions/Elements.ts
+        </p>
+        <div class="definitions">
+          
+        <dl class="dl-horizontal step-definition" regex="%D1%8D%D0%BB%D0%B5%D0%BC%D0%B5%D0%BD%D1%82%D1%8B%3A">
+          <dt>Regex</dt>
+          <dd>элементы:</dd>
+          <dt>Keyword</dt>
+          <dd>given</dd>
+          <dt>Parameters</dt>
+          <dd>table, callback</dd>
+          <dt>URI</dt>
+          <dd>Elements.ts:82</dd>
+        </dl>
+       
+        <dl class="dl-horizontal step-definition" regex="%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5%20%D1%84%D0%BE%D1%80%D0%BC%D1%8B%3A">
+          <dt>Regex</dt>
+          <dd>данные формы:</dd>
+          <dt>Keyword</dt>
+          <dd>given</dd>
+          <dt>Parameters</dt>
+          <dd>table: Table</dd>
+          <dt>URI</dt>
+          <dd>Elements.ts:96</dd>
+        </dl>
+      
+        </div>
+      </div>
+    
+      <div class="file-block">
+        <input type="button" class="fileToggleButton" onClick="toggleDefinitions(this)" value="Toggle">
+        <p class="filename-header">
+          src/steps/elements.ts
+        </p>
+        <div class="definitions">
+          
+        <dl class="dl-horizontal step-definition" regex="%D1%8D%D0%BB%D0%B5%D0%BC%D0%B5%D0%BD%D1%82%D1%8B%3A">
+          <dt>Regex</dt>
+          <dd>элементы:</dd>
+          <dt>Keyword</dt>
+          <dd>given</dd>
+          <dt>Parameters</dt>
+          <dd>table: ITable</dd>
+          <dt>URI</dt>
+          <dd>elements.ts:26</dd>
+        </dl>
+       
+        <dl class="dl-horizontal step-definition" regex="%D0%BA%D0%BB%D0%B8%D0%BA%D0%BD%D1%83%D1%82%D1%8C%20%D0%BD%D0%B0%20(.*)">
+          <dt>Regex</dt>
+          <dd>кликнуть на (.*)</dd>
+          <dt>Keyword</dt>
+          <dd>given</dd>
+          <dt>Parameters</dt>
+          <dd>selector: string</dd>
+          <dt>URI</dt>
+          <dd>elements.ts:31</dd>
+        </dl>
+       
+        <dl class="dl-horizontal step-definition" regex="%D0%BF%D0%BE%D0%BF%D1%80%D0%BE%D0%B1%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D0%BA%D0%BB%D0%B8%D0%BA%D0%BD%D1%83%D1%82%D1%8C%20%D0%BD%D0%B0%20%22(%5B%5E%22%5D*)%22">
+          <dt>Regex</dt>
+          <dd>попробовать кликнуть на "([^"]*)"</dd>
+          <dt>Keyword</dt>
+          <dd>given</dd>
+          <dt>Parameters</dt>
+          <dd>selector: string</dd>
+          <dt>URI</dt>
+          <dd>elements.ts:36</dd>
+        </dl>
+       
+        <dl class="dl-horizontal step-definition" regex="%D0%B7%D0%B0%D0%BF%D0%BE%D0%BB%D0%BD%D0%B8%D1%82%D1%8C%20%D0%BF%D0%BE%D0%BB%D0%B5%20%22(%5B%5E%22%5D*)%22%20%D0%B7%D0%BD%D0%B0%D1%87%D0%B5%D0%BD%D0%B8%D0%B5%D0%BC%20%22(%5B%5E%22%5D*)%22">
+          <dt>Regex</dt>
+          <dd>заполнить поле "([^"]*)" значением "([^"]*)"</dd>
+          <dt>Keyword</dt>
+          <dd>given</dd>
+          <dt>Parameters</dt>
+          <dd>selector: string, value: string</dd>
+          <dt>URI</dt>
+          <dd>elements.ts:45</dd>
+        </dl>
+       
+        <dl class="dl-horizontal step-definition" regex="%D1%81%D0%BE%D0%B4%D0%B5%D1%80%D0%B6%D0%B8%D0%BC%D0%BE%D0%B5%20(.*)%20%D0%B4%D0%BE%D0%BB%D0%B6%D0%BD%D0%BE%20%D0%B1%D1%8B%D1%82%D1%8C%20%22(%5B%5E%22%5D*)%22">
+          <dt>Regex</dt>
+          <dd>содержимое (.*) должно быть "([^"]*)"</dd>
+          <dt>Keyword</dt>
+          <dd>given</dd>
+          <dt>Parameters</dt>
+          <dd>selector: string, expectedHtml: string</dd>
+          <dt>URI</dt>
+          <dd>elements.ts:54</dd>
+        </dl>
+      
+        </div>
+      </div>
+    
+      <div class="file-block">
+        <input type="button" class="fileToggleButton" onClick="toggleDefinitions(this)" value="Toggle">
+        <p class="filename-header">
+          src/steps/navigation.ts
+        </p>
+        <div class="definitions">
+          
+        <dl class="dl-horizontal step-definition" regex="%D0%B7%D0%B0%D0%B9%D1%82%D0%B8%20%D0%BD%D0%B0%20%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D1%83%20%22(%5B%5E%22%5D*)%22">
+          <dt>Regex</dt>
+          <dd>зайти на страницу "([^"]*)"</dd>
+          <dt>Keyword</dt>
+          <dd>given</dd>
+          <dt>Parameters</dt>
+          <dd>path: string</dd>
+          <dt>URI</dt>
+          <dd>navigation.ts:11</dd>
+        </dl>
+       
+        <dl class="dl-horizontal step-definition" regex="%D0%BF%D0%BE%D0%B4%D0%BE%D0%B6%D0%B4%D0%B0%D1%82%D1%8C%20(%5Cd%2B)%20%D1%81%D0%B5%D0%BA%D1%83%D0%BD%D0%B4%D1%8B%3F">
+          <dt>Regex</dt>
+          <dd>подождать (\d+) секунды?</dd>
+          <dt>Keyword</dt>
+          <dd>given</dd>
+          <dt>Parameters</dt>
+          <dd>seconds: number, callback</dd>
+          <dt>URI</dt>
+          <dd>navigation.ts:19</dd>
+        </dl>
+      
+        </div>
+      </div>
+    
+    
+    <script>
+      $('#filter').bind('propertychange change click keyup input paste', function(e) {
+        var newValue = e.currentTarget.value;
+        $('.step-definition').each(function(elem) {
+          var regexString = decodeURIComponent(this.getAttribute('regex'));
+          var searchFilter = newValue.replace(/ +/g, '.*').replace(/".*"/, '".*"');
+          var matchDefinition = new RegExp(searchFilter);
+          if (!matchDefinition.test(regexString)) {
+            this.style.display = 'none';
+          } else {
+            this.style.display = 'block';
+          }
+        });
+
+        $('.file-block').each(function() {
+          var noneFound = true;
+          $(this).find('.step-definition').each(function() {
+            var regexString = decodeURIComponent(this.getAttribute('regex'));
+            var searchFilter = newValue.replace(/ +/g, '.*').replace(/".*"/, '".*"');
+            var matchDefinition = new RegExp(searchFilter);
+            if (!matchDefinition.test(regexString)) {
+              this.style.display = 'none';
+            } else {
+              noneFound = false;
+              this.style.display = 'block';
+            }
+          });
+          console.log('nf: ' + noneFound);
+          if (noneFound) {
+            this.style.display = 'none';
+          } else {
+            this.style.display = 'block';
+          }
+        });
+      });
+    </script>
+  
+    
+    <script>
+      function toggleDefinitions(elem) {
+        var definitions = $(elem).siblings()[1];
+        $(definitions).toggle();
+      }
+
+      function toggleAll(action) {
+        if (action === 'collapse') {
+          $('.definitions').css('display', 'none');
+          $('#toggleAll').text('Show All');
+          $('#toggleAll').attr("href", "javascript:toggleAll('show')");
+        } else {
+          $('.definitions').css('display', 'block');
+          $('#toggleAll').text('Collapse All');
+          $('#toggleAll').attr("href", "javascript:toggleAll('collapse')");
+        }
+      }
+    </script>
+  
+  
+          
+    <div class="footer">
+      This report was generated by the template defined in step-dictionary@1.0.0
+    </div>
+  
+        </div>
+      </body>
+    </html>
+  
