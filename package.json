@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "$(npm bin)/cucumberjs --require build",
-    "postinstall": "npm i -g typings && typings install"
+    "postinstall": "npm install -g typings gulp && typings install && gulp"
   },
   "author": "",
   "license": "ISC",
