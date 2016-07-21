@@ -15,6 +15,8 @@
       true,
       {"multiline": "never", "singleline": "never"}
     ],
+    "no-consecutive-blank-lines": false,
+    "object-literal-sort-keys": false,
     "no-console": false,
     "no-unused-expression": true,
     "no-unused-variable": [
