@@ -27,9 +27,15 @@ gulp.task('cleanup', function() {
     return del('build');
 });
 
+gulp.task('gendoc', function() {
+    var StepDictionary = require('./tools/step-dictionary');
+    var dict = new StepDictionary('./src');
+    dict.outputReport('steps.html');
+});
+
 gulp.task('watch', function () {
     gulp.watch(['src/**/*.ts'], ['ts-babel'])
-})
+});
 
 gulp.task('dev', [
     'ts-babel',
