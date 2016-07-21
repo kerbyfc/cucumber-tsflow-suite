@@ -4,6 +4,7 @@
     "selenium-webdriver": "registry:dt/selenium-webdriver#2.44.0+20160317120654"
   },
   "dependencies": {
-    "es6-promise": "registry:npm/es6-promise#3.0.0+20160211003958"
+    "es6-promise": "registry:npm/es6-promise#3.0.0+20160211003958",
+    "lodash": "registry:npm/lodash#4.0.0+20160701205107"
   }
 }
