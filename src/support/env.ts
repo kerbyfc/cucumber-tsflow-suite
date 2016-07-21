@@ -5,6 +5,7 @@ const configure = async function() {
 
     this.registerHandler('AfterFeatures', function (event, callback) {
         driver.quit().then(() => callback());
+        return event;
     });
 };
 
