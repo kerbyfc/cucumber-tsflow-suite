@@ -15,6 +15,7 @@ export class TypeScriptWorkspace {
         this.workspace = workspace;
     }
 
+    // noinspection JSUnusedGlobalSymbols
     public dispose(): void {
         if (!this.workspace) {
             return;
