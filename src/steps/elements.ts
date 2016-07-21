@@ -115,7 +115,10 @@ class Elements {
     }
 
     /**
-     * TODO докуметация
+     * Получить именованный селектор с помощью нечеткого поиска
+     * @example
+     *      this.elements["кнопка входа"] = ".button";
+     *      this.getNamedSelector("кнопку входа") // ".button"
      */
     protected getNamedSelector(name: string): string {
         /**
