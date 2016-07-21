@@ -29,6 +29,7 @@
     "selenium-webdriver": "^2.53.2"
   },
   "dependencies": {
-    "es6-promise": "^3.2.1"
+    "es6-promise": "^3.2.1",
+    "string_score": "^0.1.22"
   }
 }
