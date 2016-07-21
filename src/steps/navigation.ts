@@ -18,7 +18,7 @@ class Navigation {
     /**
      * TODO move to another file
      */
-    @given(/^подождать (\d+) секунды?$/)
+    @given(/^подождать (\d+) секунд.?$/)
     public awaitXSeconds(seconds: number, callback): void {
         setTimeout(callback, seconds * 1000);
     }

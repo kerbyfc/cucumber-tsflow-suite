@@ -34,7 +34,7 @@ class Elements {
         this.elements = table.rowsHash();
     }
 
-    @given(/^кликнуть на (.*)$/)
+    @given(/^кликнуть (?:на|по) (.*)$/)
     public async click(selector: string): Promise<void> {
         await this.doClick(selector);
     }
