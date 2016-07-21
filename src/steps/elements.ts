@@ -29,7 +29,7 @@ class Elements {
 
     protected elements: {} = {};
 
-    @given(/^элементы:?$/)
+    @given(/^(?:есть )элементы:?$/)
     public setElements(table: ITable): void {
         this.elements = table.rowsHash();
     }
