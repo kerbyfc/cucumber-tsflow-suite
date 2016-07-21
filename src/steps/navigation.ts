@@ -10,7 +10,7 @@ import Promise = webdriver.promise.Promise;
 @binding()
 class Navigation {
 
-    @given(/^зайти на страницу "([^"]*)"$/)
+    @given(/^зайти на страницу (.*)$/)
     public async navigateToPage(url: string): Promise<void> {
         await driver.get(url);
     }
