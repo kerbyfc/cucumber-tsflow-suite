@@ -1,4 +1,8 @@
+/* tslint:disable:no-unused-variable */
+// noinspection ES6UnusedImports
 import * as webdriver from 'selenium-webdriver';
+/* tslint:enable */
+
 import {binding, given} from 'cucumber-tsflow/dist/index';
 import {driver} from '../support/driver';
 import Promise = webdriver.promise.Promise;
