@@ -68,8 +68,8 @@ class Elements {
          * Посимвольно сравнениваем фактическое содержимое с ожидаемым
          * @note Не стоит сравнивать много данных, это затруднит поддержку
          */
-        if (html !== expectedHtml) {
-            throw new Error(`${html} ≠ ${expectedHtml}`);
+        if (html.trim() !== expectedHtml.trim()) {
+            throw new Error(`'${html}' ≠ '${expectedHtml}'`);
         }
     }
 
