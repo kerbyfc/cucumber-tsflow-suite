@@ -7,7 +7,7 @@ import ElementsStepSet = require('./elements');
  * Поддержка операций с элементами
  */
 @binding()
-class InteractionStepSet extends ElementsStepSet {
+class MouseStepSet extends ElementsStepSet {
 
     @when(/^кликнуть (?:на|по) (.*)$/)
     public async click(selector: string): Promise<void> {
@@ -16,4 +16,4 @@ class InteractionStepSet extends ElementsStepSet {
 
 }
 
-export = InteractionStepSet;
+export = MouseStepSet;
