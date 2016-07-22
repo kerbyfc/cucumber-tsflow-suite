@@ -3,12 +3,12 @@
 import * as webdriver from 'selenium-webdriver';
 /* tslint:enable */
 
-import {binding, given, when} from 'cucumber-tsflow/dist/index';
+import {binding, given, when, then} from 'cucumber-tsflow/dist/index';
 import {driver} from '../support/driver';
-import Promise = webdriver.promise.Promise;
+import StepSet = require('../support/stepset');
 
 @binding()
-class Navigation {
+class Navigation extends StepSet {
 
     @given(/^открыта страница (.*)$/)
     public async onPage(url: string): Promise<void> {
@@ -31,6 +31,18 @@ class Navigation {
     @given(/^подождать (\d+) секунд.?$/)
     public awaitXSeconds(seconds: number, callback): void {
         setTimeout(callback, seconds * 1000);
+    }
+
+    @then(/^должна открыться страница (.*)$/)
+    public async urlShouldBe(url: string): Promise<string> {
+        const re: RegExp = new RegExp(url);
+        return await this.actor<string>({
+            invoke: () => driver.getCurrentUrl(),
+            until: (currentUrl: string) => re.test(currentUrl),
+            otherwise: (currentUrl: string) => {
+                throw new Error(`Текущая страница ${currentUrl} ≠ ${url}`);
+            }
+        });
     }
 
     protected async navigateToUrl(url: string): Promise<void> {
