@@ -15,3 +15,5 @@ class InteractionStepSet extends ElementsStepSet {
     }
 
 }
+
+export = InteractionStepSet;
