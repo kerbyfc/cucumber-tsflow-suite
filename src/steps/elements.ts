@@ -22,6 +22,7 @@ import
 } from 'selenium-webdriver';
 
 import Promise = promise.Promise;
+import Timer = NodeJS.Timer;
 
 /**
  * Поддержка операций с элементами
@@ -30,6 +31,7 @@ import Promise = promise.Promise;
 class Elements {
 
     protected elements: {} = {};
+    protected timeout: number = 5000;
 
     @given(/^(?:есть )элементы:?$/)
     public setElements(table: ITable): void {
@@ -39,11 +41,6 @@ class Elements {
     @when(/^кликнуть (?:на|по) (.*)$/)
     public async click(selector: string): Promise<void> {
         await this.doClick(selector);
-    }
-
-    @given(/^попробовать кликнуть на '([^']*)'$/)
-    public async tryClick(selector: string): Promise<void> {
-        await this.doClick(selector, false);
     }
 
     /**
@@ -61,11 +58,7 @@ class Elements {
 
     @then(/^содержимое (.*) должно быть '([^']*)'$/)
     public async checkElementInnerHtml(selector: string, expectedHtml: string): Promise<void> {
-        /**
-         * Находим элемент и получаем его содержимое
-         */
-        const element: WebElement  = await this.getElement(selector);
-        const html: string = await element.getInnerHtml();
+        const html: string = await this.getElementInnerHtml(selector);
         /**
          * Посимвольно сравнениваем фактическое содержимое с ожидаемым
          * @note Не стоит сравнивать много данных, это затруднит поддержку
@@ -75,22 +68,37 @@ class Elements {
         }
     }
 
-    protected async doClick(selector: string, strict: boolean = true): Promise<void> {
-        const element: WebElement = await this.getElement(selector, strict);
-        driver.actions().click(element).perform();
+    @then(/^(.*) долж(?:ен|на) быть пуст(?:ым|ой)$/)
+    public async shouldBeEmpty(selector: string): Promise<void> {
+        const html: string = await this.getElementInnerHtml(selector);
+        if (html.trim() !== '') {
+            throw new Error(`'${selector}' содержит '${html.slice(0, 100)}'`);
+        }
+    }
+
+    protected async doClick(selector: string): Promise<void> {
+        const element: WebElement = await this.getElement(selector);
+        return driver.actions().click(element).perform();
+    }
+
+    protected async getElementInnerHtml(selector: string): Promise<string> {
+        const element: WebElement = await this.getElement(selector);
+        return element.getInnerHtml();
     }
 
     /**
      * @note если нужно проверить есть ли элемент на странице,
-     * нужно использовать флаг false втором аргументом
+     * можно использовать флаг false вторым аргументом
      *
      * @example кликаем на элемент если он есть
-     *      const elements: WebElement[] = this.getElements('blah', false);
-     *      if (!elements) {
+     *      async () => {
+     *        const elements: WebElement[] = await this.getElements('blah', false);
+     *        if (!elements) {
      *          callback(); // ничего не делаем
+     *        }
      *      }
      */
-    protected getElements(selector: string, strict: boolean = true): Promise<WebElement[]> {
+    protected getElements(selector: string, timeout: number = this.timeout): Promise<WebElement[]> {
         /**
          * Пробуем получить именованный селектор
          */
@@ -101,18 +109,36 @@ class Elements {
          * для проверки наличия элементов на странице
          */
         return new Promise((resolve: (elements: WebElement[]) => void) => {
-            driver.findElements(By.css(selector)).then((elements: WebElement[]) => {
+            if (!timeout) {
+                timeout = 0;
+            }
+
+            const timer: Timer = setTimeout(() => {
                 /**
-                 *  Кидаем ошибку если нет элемента
+                 *  Кидаем ошибку если нет элемента по истечении таймера ожидания
                  */
-                if (strict && !elements.length) {
-                    throw new Error(`Элемент(ы) '${selector}' не найден(ы) на странице`);
-                }
-                /**
-                 * Возвращаем элементы
-                 */
-                resolve(elements);
-            });
+                throw new Error(`Элемент(ы) '${selector}' не найден(ы) на странице`);
+            }, timeout);
+
+            const loop: Timer = setInterval(() => {
+                driver.findElements(By.css(selector))
+                    .then((elements: WebElement[]) => {
+                        if (elements.length > 0) {
+                            /**
+                             * Возвращаем элементы
+                             */
+                            resolve(elements);
+                        }
+                    })
+                    /**
+                     * Сбрасываем таймеры
+                     */
+                    .thenFinally(() => {
+                        clearInterval(loop);
+                        clearTimeout(timer);
+                    });
+
+            }, 300); // TODO: interval pass as option
         });
 
     }
@@ -160,9 +186,9 @@ class Elements {
         return pairs[0][1];
     }
 
-    protected getElement(selector: string, strict: boolean = true): Promise<WebElement> {
+    protected getElement(selector: string, timeout: number = this.timeout): Promise<WebElement> {
         return new Promise(async (resolve) => {
-            const elements: WebElement[] = await this.getElements(selector, strict);
+            const elements: WebElement[] = await this.getElements(selector, timeout);
             resolve(elements[0]);
         });
     }
