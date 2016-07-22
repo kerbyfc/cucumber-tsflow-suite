@@ -163,15 +163,19 @@ class Elements {
         }
 
         pairs = _.map(pairs, (map) => {
-            const score: number = map[0].score(name, 1);
+            const score: number = name.score(map[0], 1);
             return map.concat([score]);
         });
 
         pairs = _.sortBy(pairs, (map) => _.last(map)).reverse();
 
         let score: number = pairs[0][2];
-        if (score < 0.2) {
-            throw new Error(`Используемое имя элемента '${name}' неочевидно`);
+
+        if (score < 0.3) {
+            throw new Error(`
+                Элемент '${name}' не найден. 
+                Ближайшее совпадение c '${pairs[0][0]}' ${(score * 100).toFixed(2)}%
+            `);
         }
 
         if (pairs.length > 1 && score.toFixed(1) === pairs[1][2].toFixed(1)) {
