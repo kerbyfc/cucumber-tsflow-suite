@@ -3,15 +3,13 @@
 'use strict';
 
 import 'string_score';
+import * as _ from 'lodash';
 import {
     binding,
     given,
     then,
     when
 } from 'cucumber-tsflow';
-
-import {driver} from '../support/driver';
-import * as _ from 'lodash';
 
 // noinspection ES6UnusedImports
 import
@@ -21,34 +19,29 @@ import
     WebElement
 } from 'selenium-webdriver';
 
+import StepSet = require('../support/stepset');
 import Promise = promise.Promise;
 import Timer = NodeJS.Timer;
-import WebDriver = webdriver.WebDriver;
-
-
-let elementsRegistry: {} = {};
 
 /**
  * Поддержка операций с элементами
  */
 @binding()
-class Elements {
+class Elements extends StepSet {
+
+    public static map: {} = {};
 
     protected get timeout(): number {
         return 5000;
     }
 
-    protected get driver(): WebDriver {
-        return driver;
-    }
-
-    protected get awaitElementsTimer(): number {
+    protected get interval(): number {
         return 300;
     }
 
     @given(/^(?:есть )элементы:?$/)
     public setElements(table: ITable): void {
-        elementsRegistry = table.rowsHash();
+        Elements.map = table.rowsHash();
     }
 
     // TODO: move to another file
@@ -56,7 +49,6 @@ class Elements {
     public async click(selector: string): Promise<void> {
         await this.doClick(selector);
     }
-
 
     @then(/^содержимое (.*) должно быть '([^']*)'$/)
     public async checkElementInnerHtml(selector: string, expectedHtml: string): Promise<void> {
@@ -80,7 +72,7 @@ class Elements {
 
     protected async doClick(selector: string): Promise<void> {
         const element: WebElement = await this.getElement(selector);
-        return driver.actions().click(element).perform();
+        return this.driver.actions().click(element).perform();
     }
 
     protected async getElementInnerHtml(selector: string): Promise<string> {
@@ -106,57 +98,40 @@ class Elements {
          */
         selector = this.getNamedSelector(selector) || selector;
 
-        /**
-         * Обещание не возвращается сразу, дожидаемся выполенения
-         * для проверки наличия элементов на странице
-         */
-        return new Promise((resolve: (elements: WebElement[]) => void) => {
-            if (!timeout) {
-                timeout = 0;
-            }
-
-            const timer: Timer = setTimeout(() => {
-                clearInterval(loop);
-                /**
-                 *  Кидаем ошибку если нет элемента по истечении таймера ожидания
-                 */
+        return this.actor<WebElement[]>({
+            invoke: () => this.driver.findElements(By.css(selector)),
+            until: (elements: WebElement[]) => elements.length > 0,
+            otherwise: () => {
                 throw new Error(`Элемент(ы) '${selector}' не найден(ы) на странице`);
-            }, timeout);
-
-            const loop: Timer = setInterval(() => {
-                driver.findElements(By.css(selector))
-                    .then((elements: WebElement[]) => {
-                        if (elements.length > 0) {
-                            clearInterval(loop);
-                            clearTimeout(timer);
-                            /**
-                             * Возвращаем элементы
-                             */
-                            resolve(elements);
-                        }
-                    });
-
-            }, this.awaitElementsTimer);
+            },
+            during: timeout,
+            every: this.interval
         });
+    }
 
+    protected log(...args: any[]): void {
+        if (process.env.DEBUG) {
+            console.log.apply(console, ['     '].concat(args));
+        }
     }
 
     /**
      * Получить именованный селектор с помощью нечеткого поиска
      * @example
-     *      elementsRegistry["кнопка входа"] = ".button";
+     *      Elements.map["кнопка входа"] = ".button";
      *      this.getNamedSelector("кнопку входа") // ".button"
      */
     protected getNamedSelector(name: string): string {
         /**
          * Проверить есть ли точное совпадение
          */
-        let element = elementsRegistry[name];
+        let element = Elements.map[name];
         if (element) {
+            this.log(`Use ${element}`);
             return element;
         }
 
-        let pairs = _.toPairs(elementsRegistry);
+        let pairs = _.toPairs(Elements.map);
 
         if (!pairs.length) {
             return;
@@ -172,10 +147,11 @@ class Elements {
         let score: number = pairs[0][2];
 
         if (score < 0.3) {
-            throw new Error(`
-                Элемент '${name}' не найден. 
-                Ближайшее совпадение c '${pairs[0][0]}' ${(score * 100).toFixed(2)}%
-            `);
+            let error: string = `Элемент '${name}' не найден.`;
+            if (process.env.DEBUG) {
+                error += `Ближайшее совпадение c '${pairs[0][0]}' ${(score * 100).toFixed(2)}%`;
+            }
+            throw new Error(error);
         }
 
         if (pairs.length > 1 && score.toFixed(1) === pairs[1][2].toFixed(1)) {
@@ -185,12 +161,14 @@ class Elements {
             );
         }
 
+        this.log(`Use ${pairs[0][1]}`);
         return pairs[0][1];
     }
 
     protected getElement(selector: string, timeout: number = this.timeout): Promise<WebElement> {
         return new Promise(async (resolve) => {
             const elements: WebElement[] = await this.getElements(selector, timeout);
+            // TODO: warning if element if not unique
             resolve(elements[0]);
         });
     }
