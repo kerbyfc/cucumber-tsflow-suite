@@ -16,7 +16,7 @@ class Inputs extends Elements {
     @when(/^ввести в (.*?(?= (?:текст|цифр.?|значение)| ')).*'([^']*)'$/)
     public async fillInput(selector: string, value: string): Promise<void> {
         const input: WebElement = await this.getElement(selector);
-        await this.driver.actions()
+        return await this.driver.actions()
             .click(input)
             .sendKeys(value)
             .perform();
