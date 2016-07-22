@@ -23,6 +23,10 @@ import
 
 import Promise = promise.Promise;
 import Timer = NodeJS.Timer;
+import WebDriver = webdriver.WebDriver;
+
+
+let elementsRegistry: {} = {};
 
 /**
  * Поддержка операций с элементами
@@ -30,31 +34,29 @@ import Timer = NodeJS.Timer;
 @binding()
 class Elements {
 
-    protected elements: {} = {};
-    protected timeout: number = 5000;
+    protected get timeout(): number {
+        return 5000;
+    }
+
+    protected get driver(): WebDriver {
+        return driver;
+    }
+
+    protected get awaitElementsTimer(): number {
+        return 300;
+    }
 
     @given(/^(?:есть )элементы:?$/)
     public setElements(table: ITable): void {
-        this.elements = table.rowsHash();
+        elementsRegistry = table.rowsHash();
     }
 
+    // TODO: move to another file
     @when(/^кликнуть (?:на|по) (.*)$/)
     public async click(selector: string): Promise<void> {
         await this.doClick(selector);
     }
 
-    /**
-     * @param selector
-     * @param value
-     */
-    @when(/^заполнить поле '([^']*)' значением '([^']*)'$/)
-    public async fillInput(selector: string, value: string): Promise<void> {
-        const input: WebElement = await this.getElement(selector);
-        await driver.actions()
-            .click(input)
-            .sendKeys(value)
-            .perform();
-    }
 
     @then(/^содержимое (.*) должно быть '([^']*)'$/)
     public async checkElementInnerHtml(selector: string, expectedHtml: string): Promise<void> {
@@ -114,6 +116,7 @@ class Elements {
             }
 
             const timer: Timer = setTimeout(() => {
+                clearInterval(loop);
                 /**
                  *  Кидаем ошибку если нет элемента по истечении таймера ожидания
                  */
@@ -124,21 +127,16 @@ class Elements {
                 driver.findElements(By.css(selector))
                     .then((elements: WebElement[]) => {
                         if (elements.length > 0) {
+                            clearInterval(loop);
+                            clearTimeout(timer);
                             /**
                              * Возвращаем элементы
                              */
                             resolve(elements);
                         }
-                    })
-                    /**
-                     * Сбрасываем таймеры
-                     */
-                    .thenFinally(() => {
-                        clearInterval(loop);
-                        clearTimeout(timer);
                     });
 
-            }, 300); // TODO: interval pass as option
+            }, this.awaitElementsTimer);
         });
 
     }
@@ -146,19 +144,19 @@ class Elements {
     /**
      * Получить именованный селектор с помощью нечеткого поиска
      * @example
-     *      this.elements["кнопка входа"] = ".button";
+     *      elementsRegistry["кнопка входа"] = ".button";
      *      this.getNamedSelector("кнопку входа") // ".button"
      */
     protected getNamedSelector(name: string): string {
         /**
          * Проверить есть ли точное совпадение
          */
-        let element = this.elements[name];
+        let element = elementsRegistry[name];
         if (element) {
             return element;
         }
 
-        let pairs = _.toPairs(this.elements);
+        let pairs = _.toPairs(elementsRegistry);
 
         if (!pairs.length) {
             return;
