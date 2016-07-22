@@ -5,7 +5,7 @@ import {binding, when} from 'cucumber-tsflow';
 import WebElement = webdriver.WebElement;
 
 @binding()
-class Inputs extends ElementsStepSet {
+class KeyboardStepSet extends ElementsStepSet {
 
     /**
      * @param selector
@@ -22,4 +22,4 @@ class Inputs extends ElementsStepSet {
 
 }
 
-export = Inputs;
+export = KeyboardStepSet;
