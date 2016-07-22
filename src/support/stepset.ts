@@ -24,7 +24,7 @@ class StepSet {
         return new Promise((resolve: IFulfilledCallback<T>) => {
             let result: T;
             if (!action.during) {
-                action.during = 5000;
+                action.during = 5010;
             }
             if (!action.every) {
                 action.every = 1000;

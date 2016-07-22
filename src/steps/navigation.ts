@@ -40,6 +40,7 @@ class Navigation extends StepSet {
         return await this.actor<string>({
             invoke: () => driver.getCurrentUrl(),
             until: (currentUrl: string) => re.test(currentUrl),
+            during: 15000,
             otherwise: (currentUrl: string) => {
                 throw new Error(`Текущая страница ${currentUrl} ≠ ${url}`);
             }
