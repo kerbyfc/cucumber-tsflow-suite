@@ -54,11 +54,6 @@ class ElementsStepSet extends StepSet {
         }
     }
 
-    protected async doClick(selector: string): Promise<void> {
-        const element: WebElement = await this.getElement(selector);
-        return this.driver.actions().click(element).perform();
-    }
-
     protected async getElementInnerHtml(selector: string): Promise<string> {
         const element: WebElement = await this.getElement(selector);
         return element.getInnerHtml();

@@ -2,6 +2,7 @@
 
 import {binding, when} from 'cucumber-tsflow/dist/index';
 import ElementsStepSet = require('./elements');
+import WebElement = webdriver.WebElement;
 
 /**
  * Поддержка операций с элементами
@@ -11,7 +12,8 @@ class MouseStepSet extends ElementsStepSet {
 
     @when(/^кликнуть (?:на|по) (.*)$/)
     public async click(selector: string): Promise<void> {
-        await this.doClick(selector);
+        const element: WebElement = await this.getElement(selector);
+        return this.driver.actions().click(element).perform();
     }
 
 }
