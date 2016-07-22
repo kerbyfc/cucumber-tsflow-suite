@@ -5,7 +5,9 @@
 import 'string_score';
 import {
     binding,
-    given
+    given,
+    then,
+    when
 } from 'cucumber-tsflow';
 
 import {driver} from '../support/driver';
@@ -34,7 +36,7 @@ class Elements {
         this.elements = table.rowsHash();
     }
 
-    @given(/^кликнуть (?:на|по) (.*)$/)
+    @when(/^кликнуть (?:на|по) (.*)$/)
     public async click(selector: string): Promise<void> {
         await this.doClick(selector);
     }
@@ -48,7 +50,7 @@ class Elements {
      * @param selector
      * @param value
      */
-    @given(/^заполнить поле '([^']*)' значением '([^']*)'$/)
+    @when(/^заполнить поле '([^']*)' значением '([^']*)'$/)
     public async fillInput(selector: string, value: string): Promise<void> {
         const input: WebElement = await this.getElement(selector);
         await driver.actions()
@@ -57,7 +59,7 @@ class Elements {
             .perform();
     }
 
-    @given(/^содержимое (.*) должно быть '([^']*)'$/)
+    @then(/^содержимое (.*) должно быть '([^']*)'$/)
     public async checkElementInnerHtml(selector: string, expectedHtml: string): Promise<void> {
         /**
          * Находим элемент и получаем его содержимое
