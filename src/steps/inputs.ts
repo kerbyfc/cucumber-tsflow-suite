@@ -1,4 +1,4 @@
-import Elements = require('./elements');
+import ElementsStepSet = require('./elements');
 
 import {
     binding,
@@ -7,7 +7,7 @@ import {
 import WebElement = webdriver.WebElement;
 
 @binding()
-class Inputs extends Elements {
+class Inputs extends ElementsStepSet {
 
     /**
      * @param selector

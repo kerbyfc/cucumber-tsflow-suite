@@ -7,8 +7,7 @@ import * as _ from 'lodash';
 import {
     binding,
     given,
-    then,
-    when
+    then
 } from 'cucumber-tsflow';
 
 // noinspection ES6UnusedImports
@@ -21,13 +20,12 @@ import
 
 import StepSet = require('../support/stepset');
 import Promise = promise.Promise;
-import Timer = NodeJS.Timer;
 
 /**
  * Поддержка операций с элементами
  */
 @binding()
-class Elements extends StepSet {
+class ElementsStepSet extends StepSet {
 
     public static map: {} = {};
 
@@ -41,13 +39,7 @@ class Elements extends StepSet {
 
     @given(/^(?:есть )элементы:?$/)
     public setElements(table: ITable): void {
-        Elements.map = table.rowsHash();
-    }
-
-    // TODO: move to another file
-    @when(/^кликнуть (?:на|по) (.*)$/)
-    public async click(selector: string): Promise<void> {
-        await this.doClick(selector);
+       ElementsStepSet.map = table.rowsHash();
     }
 
     @then(/^содержимое (.*) должно быть '([^']*)'$/)
@@ -118,20 +110,20 @@ class Elements extends StepSet {
     /**
      * Получить именованный селектор с помощью нечеткого поиска
      * @example
-     *      Elements.map["кнопка входа"] = ".button";
+     *     ElementsStepSet.map["кнопка входа"] = ".button";
      *      this.getNamedSelector("кнопку входа") // ".button"
      */
     protected getNamedSelector(name: string): string {
         /**
          * Проверить есть ли точное совпадение
          */
-        let element = Elements.map[name];
+        let element = ElementsStepSet.map[name];
         if (element) {
             this.log(`Use ${element}`);
             return element;
         }
 
-        let pairs = _.toPairs(Elements.map);
+        let pairs = _.toPairs(ElementsStepSet.map);
 
         if (!pairs.length) {
             return;
@@ -175,4 +167,4 @@ class Elements extends StepSet {
 
 }
 
-export = Elements;
+export = ElementsStepSet;
