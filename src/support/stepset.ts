@@ -1,10 +1,12 @@
+///<reference path="../../typings/custom/index.d.ts" />
+
+'use strict';
+
 /* tslint:disable:no-unused-variable */
 // noinspection ES6UnusedImports
 import * as webdriver from 'selenium-webdriver';
 /* tslint:enable */
-
 import {driver} from './driver';
-
 import WebDriver = webdriver.WebDriver;
 import Promise = webdriver.promise.Promise;
 import IFulfilledCallback = webdriver.promise.IFulfilledCallback;

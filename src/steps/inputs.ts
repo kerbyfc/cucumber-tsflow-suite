@@ -1,9 +1,7 @@
-import ElementsStepSet = require('./elements');
+'use strict';
 
-import {
-    binding,
-    when
-} from 'cucumber-tsflow';
+import ElementsStepSet = require('./elements');
+import {binding, when} from 'cucumber-tsflow';
 import WebElement = webdriver.WebElement;
 
 @binding()

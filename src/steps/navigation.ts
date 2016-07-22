@@ -1,8 +1,9 @@
+'use strict';
+
 /* tslint:disable:no-unused-variable */
 // noinspection ES6UnusedImports
 import * as webdriver from 'selenium-webdriver';
 /* tslint:enable */
-
 import {binding, given, when, then} from 'cucumber-tsflow/dist/index';
 import {driver} from '../support/driver';
 import StepSet = require('../support/stepset');

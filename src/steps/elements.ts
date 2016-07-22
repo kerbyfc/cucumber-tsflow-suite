@@ -1,15 +1,8 @@
-///<reference path="../../typings/custom/index.d.ts" />
-
 'use strict';
 
 import 'string_score';
 import * as _ from 'lodash';
-import {
-    binding,
-    given,
-    then
-} from 'cucumber-tsflow';
-
+import {binding, given, then} from 'cucumber-tsflow';
 // noinspection ES6UnusedImports
 import
 {
@@ -17,7 +10,6 @@ import
     promise,
     WebElement
 } from 'selenium-webdriver';
-
 import StepSet = require('../support/stepset');
 import Promise = promise.Promise;
 
