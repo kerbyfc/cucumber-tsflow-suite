@@ -34,7 +34,9 @@ class ElementsStepSet extends StepSet {
        ElementsStepSet.map = table.rowsHash();
     }
 
-    @then(/^содержимое (.*) должно быть '([^']*)'$/)
+    @then([
+        /^содержимое (.*) должно быть '([^']*)'$/
+    ])
     public async checkElementInnerHtml(selector: string, expectedHtml: string): Promise<void> {
         const html: string = await this.getElementInnerHtml(selector);
         /**
@@ -46,7 +48,9 @@ class ElementsStepSet extends StepSet {
         }
     }
 
-    @then(/^(.*) долж(?:ен|на) быть пуст(?:ым|ой)$/)
+    @then([
+        /^(.*) долж(?:ен|на) быть пуст(?:ым|ой)$/
+    ])
     public async shouldBeEmpty(selector: string): Promise<void> {
         const html: string = await this.getElementInnerHtml(selector);
         if (html.trim() !== '') {
