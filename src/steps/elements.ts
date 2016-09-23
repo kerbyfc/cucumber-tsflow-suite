@@ -8,6 +8,7 @@ import
     WebElement
 } from 'selenium-webdriver';
 
+//noinspection TypeScriptUnresolvedVariable
 import Promise = promise.Promise;
 import {binding, then} from 'cucumber-tsflow/dist/index';
 

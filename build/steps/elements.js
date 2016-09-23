@@ -47,6 +47,7 @@ var __awaiter = undefined && undefined.__awaiter || function (thisArg, _argument
 };
 // noinspection ES6UnusedImports
 var selenium_webdriver_1 = require('selenium-webdriver');
+//noinspection TypeScriptUnresolvedVariable
 var Promise = selenium_webdriver_1.promise.Promise;
 var index_1 = require('cucumber-tsflow/dist/index');
 var StepSet = require('../support/stepset');

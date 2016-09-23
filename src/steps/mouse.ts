@@ -17,7 +17,7 @@ class MouseStepSet extends ElementsStepSet {
     ]))
     public async click(selector: string): Promise<void> {
         const element: WebElement = await this.getElement(selector);
-        return this.driver.actions().click(element).perform();
+        this.driver.actions().click(element).perform();
     }
 
 }

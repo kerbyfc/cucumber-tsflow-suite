@@ -6,6 +6,7 @@ import * as webdriver from 'selenium-webdriver';
 import * as uri from 'urijs';
 import URI = uri.URI;
 /* tslint:enable */
+
 import Promise = webdriver.promise.Promise;
 import {binding, when} from 'cucumber-tsflow/dist/index';
 

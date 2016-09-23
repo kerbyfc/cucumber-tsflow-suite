@@ -74,7 +74,8 @@ var MouseStepSet = function (_ElementsStepSet) {
 
                             case 2:
                                 element = _context.sent;
-                                return _context.abrupt("return", this.driver.actions().click(element).perform());
+
+                                this.driver.actions().click(element).perform();
 
                             case 4:
                             case "end":
