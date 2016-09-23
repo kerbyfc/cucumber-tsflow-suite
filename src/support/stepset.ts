@@ -2,21 +2,44 @@
 
 'use strict';
 
+import * as jsdiff from 'diff';
+import 'colors';
+
 /* tslint:disable:no-unused-variable */
 // noinspection ES6UnusedImports
 import * as webdriver from 'selenium-webdriver';
 /* tslint:enable */
-import {driver} from './driver';
 import WebDriver = webdriver.WebDriver;
 import Promise = webdriver.promise.Promise;
 import IFulfilledCallback = webdriver.promise.IFulfilledCallback;
-import {binding} from 'cucumber-tsflow/dist/index';
+import {after, binding, given} from 'cucumber-tsflow/dist/index';
+
+import {driver} from './driver';
+import {pattern} from './helpers';
 
 @binding()
 class StepSet {
 
+    // TODO: separate
+    @given(pattern([
+        /^подождать (\d+) секунд.?$/
+    ]))
+    public awaitXSeconds(seconds: number, callback): void {
+        setTimeout(callback, seconds * 1000);
+    }
+
     protected get driver(): WebDriver {
         return driver;
+    }
+
+    protected get debug() {
+        return process.env.DEBUG;
+    }
+
+    protected log(...args: any[]): void {
+        if (this.debug) {
+            console.log.apply(console, ['     '].concat(args));
+        }
     }
 
     // TODO: create class
@@ -44,6 +67,16 @@ class StepSet {
                 }
             }, action.every);
         });
+    }
+
+    protected diff(text: string, other: string, before: string = '', after: string = '') {
+        const diff = jsdiff.diffChars(text, other);
+        let out: string[] = [];
+        diff.forEach(function(part){
+            let color = part.added ? 'green' : part.removed ? 'red' : 'black';
+            out.push(part.value[color]);
+        });
+        return before['black'] + out.join('') + after['black'];
     }
 }
 

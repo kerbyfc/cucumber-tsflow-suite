@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "$(npm bin)/cucumberjs --require build",
-    "postinstall": "npm install -g typings gulp && typings install && gulp"
+  },
+  "bin": {
+    "cucumber-ts-suite": "cli.js"
   },
   "author": "",
   "license": "ISC",
@@ -18,7 +19,7 @@
     "babel-preset-stage-0": "^6.5.0",
     "babel-runtime": "^6.9.2",
     "cucumber": "^1.2.0",
-    "cucumber-tsflow": "^1.1.1",
+    "cucumber-tsflow": "^1.2.0",
     "del": "^2.2.1",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
@@ -26,10 +27,17 @@
     "gulp-rename": "^1.2.2",
     "gulp-typescript": "^2.13.6",
     "selenium-binaries": "^0.5.0",
-    "selenium-webdriver": "^2.53.2"
+    "selenium-webdriver": "^2.53.2",
+    "gulp-filter": "^4.0.0"
   },
   "dependencies": {
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "babel-register": "^6.14.0",
+    "colors": "^1.1.2",
+    "diff": "^2.2.3",
     "es6-promise": "^3.2.1",
-    "string_score": "^0.1.22"
+    "urijs": "^1.18.1",
+    "cucumber-templates": "file:./cucumber-templates"
   }
 }

@@ -4,44 +4,50 @@ var babel = require('gulp-babel');
 var rename = require('gulp-rename');
 var del = require('del');
 var plumber = require('gulp-plumber');
- 
-gulp.task('ts-babel', ['cleanup'], function () {
-    // Using my existing tsconfig.json file
-    var tsProject = ts.createProject(__dirname + '/tsconfig.json');
- 
-    // The `base` part is needed so
-    //  that `dest()` doesnt map folders correctly after rename
-    return gulp.src('src/**/*.ts', { base: 'src' })
-        .pipe(plumber())
-        .pipe(ts(tsProject))
+
+var paths = {
+    config: __dirname + '/tsconfig.json',
+    steps: 'src/steps/*.ts',
+    support: 'src/support/*.ts',
+    bootstrap: 'src/index.js',
+    build: 'build'
+};
+
+function compile(src, dest, typescript) {
+    var task = gulp.src(src, { base: 'src' })
+        .pipe(plumber());
+
+    if (typescript) {
+        task = task.pipe(ts(ts.createProject(paths.config)));
+    }
+
+    return task
         .pipe(babel({
             presets: ['es2015', 'stage-0']
         }))
         .pipe(rename(function (path) {
             path.extname = '.js';
         }))
-        .pipe(gulp.dest('build'));
+        .pipe(gulp.dest(dest));
+}
+
+gulp.task('compile-sources', ['cleanup'], function () {
+    return compile([paths.steps, paths.support], paths.build, true);
 });
 
 gulp.task('cleanup', function() {
-    return del('build');
-});
-
-gulp.task('gendoc', function() {
-    var StepDictionary = require('./tools/step-dictionary');
-    var dict = new StepDictionary('./src');
-    dict.outputReport('steps.html');
+    return del(paths.build);
 });
 
 gulp.task('watch', function () {
-    gulp.watch(['src/**/*.ts'], ['ts-babel'])
+    gulp.watch(['src/**/*.ts'], ['compile-sources']);
 });
 
 gulp.task('dev', [
-    'ts-babel',
+    'compile-sources',
     'watch'
 ]);
 
 gulp.task('default', [
-    'ts-babel'
+    'compile-sources'
 ]);

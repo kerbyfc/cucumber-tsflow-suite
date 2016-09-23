@@ -1,8 +1,5 @@
 'use strict';
 
-import 'string_score';
-import * as _ from 'lodash';
-import {binding, given, then} from 'cucumber-tsflow';
 // noinspection ES6UnusedImports
 import
 {
@@ -10,10 +7,14 @@ import
     promise,
     WebElement
 } from 'selenium-webdriver';
-import StepSet = require('../support/stepset');
-import Promise = promise.Promise;
 
-/**
+import Promise = promise.Promise;
+import {binding, then} from 'cucumber-tsflow/dist/index';
+
+import StepSet = require('../support/stepset');
+import {pattern} from '../support/helpers';
+
+/*
  * Поддержка операций с элементами
  */
 @binding()
@@ -29,14 +30,9 @@ class ElementsStepSet extends StepSet {
         return 300;
     }
 
-    @given(/^(?:есть )элементы:?$/)
-    public setElements(table: ITable): void {
-       ElementsStepSet.map = table.rowsHash();
-    }
-
-    @then([
+    @then(pattern([
         /^содержимое (.*) должно быть '([^']*)'$/
-    ])
+    ]))
     public async checkElementInnerHtml(selector: string, expectedHtml: string): Promise<void> {
         const html: string = await this.getElementInnerHtml(selector);
         /**
@@ -48,9 +44,9 @@ class ElementsStepSet extends StepSet {
         }
     }
 
-    @then([
+    @then(pattern([
         /^(.*) долж(?:ен|на) быть пуст(?:ым|ой)$/
-    ])
+    ]))
     public async shouldBeEmpty(selector: string): Promise<void> {
         const html: string = await this.getElementInnerHtml(selector);
         if (html.trim() !== '') {
@@ -79,7 +75,7 @@ class ElementsStepSet extends StepSet {
         /**
          * Пробуем получить именованный селектор
          */
-        selector = this.getNamedSelector(selector) || selector;
+        // selector = this.getNamedSelector(selector) || selector;
 
         return this.actor<WebElement[]>({
             invoke: () => this.driver.findElements(By.css(selector)),
@@ -90,62 +86,6 @@ class ElementsStepSet extends StepSet {
             during: timeout,
             every: this.interval
         });
-    }
-
-    protected log(...args: any[]): void {
-        if (process.env.DEBUG) {
-            console.log.apply(console, ['     '].concat(args));
-        }
-    }
-
-    /**
-     * Получить именованный селектор с помощью нечеткого поиска
-     * @example
-     *     ElementsStepSet.map["кнопка входа"] = ".button";
-     *      this.getNamedSelector("кнопку входа") // ".button"
-     */
-    protected getNamedSelector(name: string): string {
-        /**
-         * Проверить есть ли точное совпадение
-         */
-        let element = ElementsStepSet.map[name];
-        if (element) {
-            this.log(`Use ${element}`);
-            return element;
-        }
-
-        let pairs = _.toPairs(ElementsStepSet.map);
-
-        if (!pairs.length) {
-            return;
-        }
-
-        pairs = _.map(pairs, (map) => {
-            const score: number = name.score(map[0], 1);
-            return map.concat([score]);
-        });
-
-        pairs = _.sortBy(pairs, (map) => _.last(map)).reverse();
-
-        let score: number = pairs[0][2];
-
-        if (score < 0.3) {
-            let error: string = `Элемент '${name}' не найден.`;
-            if (process.env.DEBUG) {
-                error += `Ближайшее совпадение c '${pairs[0][0]}' ${(score * 100).toFixed(2)}%`;
-            }
-            throw new Error(error);
-        }
-
-        if (pairs.length > 1 && score.toFixed(1) === pairs[1][2].toFixed(1)) {
-            throw new Error(
-                `Используемое имя элемента '${name}' неоднозначно, 
-                как и ${pairs[1][0]}`
-            );
-        }
-
-        this.log(`Use ${pairs[0][1]}`);
-        return pairs[0][1];
     }
 
     protected getElement(selector: string, timeout: number = this.timeout): Promise<WebElement> {

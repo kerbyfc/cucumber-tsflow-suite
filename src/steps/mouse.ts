@@ -1,8 +1,10 @@
 'use strict';
 
-import {binding, when} from '../support/decorators';
+import {binding, when} from 'cucumber-tsflow/dist/index';
+
 import ElementsStepSet = require('./elements');
 import WebElement = webdriver.WebElement;
+import {pattern} from '../support/helpers';
 
 /**
  * Поддержка операций с элементами
@@ -10,9 +12,9 @@ import WebElement = webdriver.WebElement;
 @binding()
 class MouseStepSet extends ElementsStepSet {
 
-    @when([
+    @when(pattern([
         /^кликнуть (?:на|по) (.*)$/
-    ])
+    ]))
     public async click(selector: string): Promise<void> {
         const element: WebElement = await this.getElement(selector);
         return this.driver.actions().click(element).perform();
