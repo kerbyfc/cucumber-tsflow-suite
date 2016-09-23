@@ -60,7 +60,7 @@ var Navigation = function (_StepSet) {
     function Navigation() {
         _classCallCheck(this, Navigation);
 
-        return _possibleConstructorReturn(this, (Navigation.__proto__ || Object.getPrototypeOf(Navigation)).apply(this, arguments));
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(Navigation).apply(this, arguments));
     }
 
     _createClass(Navigation, [{

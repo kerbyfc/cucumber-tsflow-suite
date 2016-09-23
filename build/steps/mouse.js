@@ -57,7 +57,7 @@ var MouseStepSet = function (_ElementsStepSet) {
     function MouseStepSet() {
         _classCallCheck(this, MouseStepSet);
 
-        return _possibleConstructorReturn(this, (MouseStepSet.__proto__ || Object.getPrototypeOf(MouseStepSet)).apply(this, arguments));
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(MouseStepSet).apply(this, arguments));
     }
 
     _createClass(MouseStepSet, [{

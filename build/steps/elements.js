@@ -60,7 +60,7 @@ var ElementsStepSet = function (_StepSet) {
     function ElementsStepSet() {
         _classCallCheck(this, ElementsStepSet);
 
-        return _possibleConstructorReturn(this, (ElementsStepSet.__proto__ || Object.getPrototypeOf(ElementsStepSet)).apply(this, arguments));
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(ElementsStepSet).apply(this, arguments));
     }
 
     _createClass(ElementsStepSet, [{
@@ -146,7 +146,7 @@ var ElementsStepSet = function (_StepSet) {
                                 throw new Error("'" + container + "' не содержит " + children);
 
                             case 5:
-                                if (!(elements.length === count)) {
+                                if (!(elements.length !== +count)) {
                                     _context3.next = 7;
                                     break;
                                 }
@@ -272,6 +272,6 @@ var ElementsStepSet = function (_StepSet) {
 ElementsStepSet.map = {};
 __decorate([index_1.then(helpers_1.pattern([/^содержимое (.*) должно быть '([^']*)'$/])), __metadata('design:type', Function), __metadata('design:paramtypes', [String, String]), __metadata('design:returntype', Promise)], ElementsStepSet.prototype, "checkElementInnerHtml", null);
 __decorate([index_1.then(helpers_1.pattern([/^(.*) долж(?:ен|на) быть пуст(?:ым|ой)$/])), __metadata('design:type', Function), __metadata('design:paramtypes', [String]), __metadata('design:returntype', Promise)], ElementsStepSet.prototype, "shouldBeEmpty", null);
-__decorate([index_1.then(helpers_1.pattern([/^(.*) долж(ен|на) содержать (\d+) (.*)$/])), __metadata('design:type', Function), __metadata('design:paramtypes', [String, Number, String]), __metadata('design:returntype', Promise)], ElementsStepSet.prototype, "checkChildrenCount", null);
+__decorate([index_1.then(helpers_1.pattern([/^(.*) долж(?:ен|на) содержать (\d+) (.*)$/])), __metadata('design:type', Function), __metadata('design:paramtypes', [String, Number, String]), __metadata('design:returntype', Promise)], ElementsStepSet.prototype, "checkChildrenCount", null);
 ElementsStepSet = __decorate([index_1.binding(), __metadata('design:paramtypes', [])], ElementsStepSet);
 module.exports = ElementsStepSet;

@@ -58,7 +58,7 @@ var UrlStepSet = function (_StepSet) {
     _inherits(UrlStepSet, _StepSet);
 
     function UrlStepSet() {
-        var _ref;
+        var _Object$getPrototypeO;
 
         _classCallCheck(this, UrlStepSet);
 
@@ -66,7 +66,7 @@ var UrlStepSet = function (_StepSet) {
             args[_key] = arguments[_key];
         }
 
-        var _this = _possibleConstructorReturn(this, (_ref = UrlStepSet.__proto__ || Object.getPrototypeOf(UrlStepSet)).call.apply(_ref, [this].concat(args)));
+        var _this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(UrlStepSet)).call.apply(_Object$getPrototypeO, [this].concat(args)));
 
         _this.hashParams = /(\?|\&)([^=]+)\=([^&]+)/;
         return _this;

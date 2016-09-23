@@ -55,14 +55,14 @@ class ElementsStepSet extends StepSet {
     }
 
     @then(pattern([
-        /^(.*) долж(ен|на) содержать (\d+) (.*)$/
+        /^(.*) долж(?:ен|на) содержать (\d+) (.*)$/
     ]))
     public async checkChildrenCount(container: string, count: number, children: string): Promise<void> {
         const elements: WebElement[] = await this.getElements(`${container} > ${children}`);
         if (!elements.length) {
             throw new Error(`'${container}' не содержит ${children}`);
         }
-        if (elements.length === count) {
+        if (elements.length !== +count) {
             throw new Error(`'${container}' содержит ${elements.length} '${children}' а не ${count}`);
         }
     }

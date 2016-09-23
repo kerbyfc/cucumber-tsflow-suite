@@ -54,7 +54,7 @@ var KeyboardStepSet = function (_ElementsStepSet) {
     function KeyboardStepSet() {
         _classCallCheck(this, KeyboardStepSet);
 
-        return _possibleConstructorReturn(this, (KeyboardStepSet.__proto__ || Object.getPrototypeOf(KeyboardStepSet)).apply(this, arguments));
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(KeyboardStepSet).apply(this, arguments));
     }
 
     _createClass(KeyboardStepSet, [{
