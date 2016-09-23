@@ -1,3 +1,0 @@
-[submodule "cucumber-templates"]
-	path = cucumber-templates
-	url = ssh://git@git.acronis.com:7989/~alexander.lukin/cucumber-templates.git

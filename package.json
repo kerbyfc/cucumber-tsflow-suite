@@ -38,6 +38,6 @@
     "diff": "^2.2.3",
     "es6-promise": "^3.2.1",
     "urijs": "^1.18.1",
-    "cucumber-templates": "file:./cucumber-templates"
+    "cucumber-templates": "git+ssh://git@github.com:kerbyfc/cucumber-templates.git#master"
   }
 }
