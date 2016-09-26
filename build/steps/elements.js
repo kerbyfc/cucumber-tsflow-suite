@@ -212,7 +212,7 @@ var ElementsStepSet = function (_StepSet) {
             // selector = this.getNamedSelector(selector) || selector;
             return this.actor({
                 invoke: function invoke() {
-                    return _this2.driver.findElements(selenium_webdriver_1.By.css(selector));
+                    return _this2.getElementBySelector(selector);
                 },
                 until: function until(elements) {
                     return elements.length > 0;
@@ -255,6 +255,15 @@ var ElementsStepSet = function (_StepSet) {
                     }, _callee5, this);
                 }));
             });
+        }
+    }, {
+        key: "getElementBySelector",
+        value: function getElementBySelector(selector) {
+            if (/^\/\//.test(selector)) {
+                return this.driver.findElements(selenium_webdriver_1.By.xpath(selector));
+            } else {
+                return this.driver.findElements(selenium_webdriver_1.By.css(selector));
+            }
         }
     }, {
         key: "timeout",

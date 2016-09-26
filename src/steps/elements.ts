@@ -92,7 +92,7 @@ class ElementsStepSet extends StepSet {
         // selector = this.getNamedSelector(selector) || selector;
 
         return this.actor<WebElement[]>({
-            invoke: () => this.driver.findElements(By.css(selector)),
+            invoke: () => this.getElementBySelector(selector),
             until: (elements: WebElement[]) => elements.length > 0,
             otherwise: () => {
                 throw new Error(`Элемент(ы) '${selector}' не найден(ы) на странице`);
@@ -108,6 +108,15 @@ class ElementsStepSet extends StepSet {
             // TODO: warning if element if not unique
             resolve(elements[0]);
         });
+    }
+
+
+    protected getElementBySelector(selector) {
+        if (/^\/\//.test(selector)) {
+            return this.driver.findElements(By.xpath(selector));
+        } else {
+            return this.driver.findElements(By.css(selector));
+        }
     }
 
 }
