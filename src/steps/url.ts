@@ -27,7 +27,9 @@ class UrlStepSet extends StepSet {
         return await this.pushState(url.href());
     }
 
-    @when(/^добавить hash-параметр (.*) со значением (.*)$/)
+    @when(pattern([
+        /^добавить hash-параметр (.*) со значением (.*)$/
+    ]))
     public async addHashParametr(name: string, value: string): Promise<void> {
         const url: URI = await this.getCurrentUrl();
         const hash: string[] = [url.hash(), `${name}=${value}`];

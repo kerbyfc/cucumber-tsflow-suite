@@ -191,6 +191,6 @@ var UrlStepSet = function (_StepSet) {
     return UrlStepSet;
 }(StepSet);
 __decorate([index_1.when(helpers_1.pattern([/^добавить get-параметр (.*) со значением (.*)$/])), __metadata('design:type', Function), __metadata('design:paramtypes', [String, String]), __metadata('design:returntype', Promise)], UrlStepSet.prototype, "addGetParameter", null);
-__decorate([index_1.when(/^добавить hash-параметр (.*) со значением (.*)$/), __metadata('design:type', Function), __metadata('design:paramtypes', [String, String]), __metadata('design:returntype', Promise)], UrlStepSet.prototype, "addHashParametr", null);
+__decorate([index_1.when(helpers_1.pattern([/^добавить hash-параметр (.*) со значением (.*)$/])), __metadata('design:type', Function), __metadata('design:paramtypes', [String, String]), __metadata('design:returntype', Promise)], UrlStepSet.prototype, "addHashParametr", null);
 UrlStepSet = __decorate([index_1.binding(), __metadata('design:paramtypes', [])], UrlStepSet);
 module.exports = UrlStepSet;

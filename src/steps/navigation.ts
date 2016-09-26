@@ -45,8 +45,10 @@ class Navigation extends StepSet {
         });
     }
 
-    @then(/^should be a transition to (.*)$/)
-    @then(/^должен произойти переход (?:на|в) (.*)$/)
+    @then(pattern([
+        /^should be a transition to (.*)$/,
+        /^должен произойти переход (?:на|в) (.*)$/
+    ]))
     public async urlShouldBe(url: string): Promise<string> {
         return await this.waitForUrlChange(url, (currentUrl: string) => {
             const diff: string = this.diff(url, currentUrl, '(', ')');
