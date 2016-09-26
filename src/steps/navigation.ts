@@ -14,18 +14,18 @@ import {pattern} from '../support/helpers';
 @binding()
 class Navigation extends StepSet {
 
-    @given(pattern([
-        /^открыт.? (.*)$/
-    ]))
-    public async onPage(url: string): Promise<void> {
-        return await this.navigateToUrl(url);
-    }
-
     @when(pattern([
         /обновить страницу/
     ]))
     public async reloadPage(): Promise<void> {
         return await driver.navigate().refresh();
+    }
+
+    @given(pattern([
+        /^открыт.? (.*)$/
+    ]))
+    public async onPage(url: string): Promise<void> {
+        return await this.navigateToUrl(url);
     }
 
     @when(pattern([
@@ -48,7 +48,7 @@ class Navigation extends StepSet {
     @then(pattern([
         /^должен произойти переход (?:на|в) (.*)$/
     ]))
-    public async urlShouldBe(url: string): Promise<string> {
+    public async urlshouldbe(url: string): Promise<string> {
         return await this.waitForUrlChange(url, (currentUrl: string) => {
             const diff: string = this.diff(url, currentUrl, '(', ')');
             throw new Error(`Текущая страница ${currentUrl} ≠ ${url}. ${diff}`);

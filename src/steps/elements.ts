@@ -32,7 +32,7 @@ class ElementsStepSet extends StepSet {
     }
 
     @then(pattern([
-        /^содержимое (.*) должно быть '([^']*)'$/
+        /^содержимое (.*) должно (?:быть|соответствовать) (.*)$/
     ]))
     public async checkElementInnerHtml(selector: string, expectedHtml: string): Promise<void> {
         const html: string = await this.getElementInnerHtml(selector);

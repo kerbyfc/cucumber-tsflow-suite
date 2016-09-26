@@ -280,7 +280,7 @@ var ElementsStepSet = function (_StepSet) {
     return ElementsStepSet;
 }(StepSet);
 ElementsStepSet.map = {};
-__decorate([index_1.then(helpers_1.pattern([/^содержимое (.*) должно быть '([^']*)'$/])), __metadata('design:type', Function), __metadata('design:paramtypes', [String, String]), __metadata('design:returntype', Promise)], ElementsStepSet.prototype, "checkElementInnerHtml", null);
+__decorate([index_1.then(helpers_1.pattern([/^содержимое (.*) должно (?:быть|соответствовать) (.*)$/])), __metadata('design:type', Function), __metadata('design:paramtypes', [String, String]), __metadata('design:returntype', Promise)], ElementsStepSet.prototype, "checkElementInnerHtml", null);
 __decorate([index_1.then(helpers_1.pattern([/^(.*) долж(?:ен|на) быть пуст(?:ым|ой)$/])), __metadata('design:type', Function), __metadata('design:paramtypes', [String]), __metadata('design:returntype', Promise)], ElementsStepSet.prototype, "shouldBeEmpty", null);
 __decorate([index_1.then(helpers_1.pattern([/^(.*) долж(?:ен|на) содержать (\d+) (.*)$/])), __metadata('design:type', Function), __metadata('design:paramtypes', [String, Number, String]), __metadata('design:returntype', Promise)], ElementsStepSet.prototype, "checkChildrenCount", null);
 ElementsStepSet = __decorate([index_1.binding(), __metadata('design:paramtypes', [])], ElementsStepSet);

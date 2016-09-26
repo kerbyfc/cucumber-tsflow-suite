@@ -64,15 +64,15 @@ var Navigation = function (_StepSet) {
     }
 
     _createClass(Navigation, [{
-        key: "onPage",
-        value: function onPage(url) {
+        key: "reloadPage",
+        value: function reloadPage() {
             return __awaiter(this, void 0, Promise, regeneratorRuntime.mark(function _callee() {
                 return regeneratorRuntime.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
                                 _context.next = 2;
-                                return this.navigateToUrl(url);
+                                return driver_1.driver.navigate().refresh();
 
                             case 2:
                                 return _context.abrupt("return", _context.sent);
@@ -86,15 +86,15 @@ var Navigation = function (_StepSet) {
             }));
         }
     }, {
-        key: "reloadPage",
-        value: function reloadPage() {
+        key: "onPage",
+        value: function onPage(url) {
             return __awaiter(this, void 0, Promise, regeneratorRuntime.mark(function _callee2() {
                 return regeneratorRuntime.wrap(function _callee2$(_context2) {
                     while (1) {
                         switch (_context2.prev = _context2.next) {
                             case 0:
                                 _context2.next = 2;
-                                return driver_1.driver.navigate().refresh();
+                                return this.navigateToUrl(url);
 
                             case 2:
                                 return _context2.abrupt("return", _context2.sent);
@@ -157,8 +157,8 @@ var Navigation = function (_StepSet) {
             }));
         }
     }, {
-        key: "urlShouldBe",
-        value: function urlShouldBe(url) {
+        key: "urlshouldbe",
+        value: function urlshouldbe(url) {
             return __awaiter(this, void 0, Promise, regeneratorRuntime.mark(function _callee5() {
                 var _this3 = this;
 
@@ -224,10 +224,10 @@ var Navigation = function (_StepSet) {
 
     return Navigation;
 }(StepSet);
-__decorate([index_1.given(helpers_1.pattern([/^открыт.? (.*)$/])), __metadata('design:type', Function), __metadata('design:paramtypes', [String]), __metadata('design:returntype', Promise)], Navigation.prototype, "onPage", null);
 __decorate([index_1.when(helpers_1.pattern([/обновить страницу/])), __metadata('design:type', Function), __metadata('design:paramtypes', []), __metadata('design:returntype', Promise)], Navigation.prototype, "reloadPage", null);
+__decorate([index_1.given(helpers_1.pattern([/^открыт.? (.*)$/])), __metadata('design:type', Function), __metadata('design:paramtypes', [String]), __metadata('design:returntype', Promise)], Navigation.prototype, "onPage", null);
 __decorate([index_1.when(helpers_1.pattern([/^перейти (?:на|в) (.*)$/])), __metadata('design:type', Function), __metadata('design:paramtypes', [String]), __metadata('design:returntype', Promise)], Navigation.prototype, "navigateToPage", null);
 __decorate([index_1.when(helpers_1.pattern([/^дождаться перехода (?:на|в) (.*)$/])), __metadata('design:type', Function), __metadata('design:paramtypes', [String]), __metadata('design:returntype', Promise)], Navigation.prototype, "afterUrlChange", null);
-__decorate([index_1.then(helpers_1.pattern([/^должен произойти переход (?:на|в) (.*)$/])), __metadata('design:type', Function), __metadata('design:paramtypes', [String]), __metadata('design:returntype', Promise)], Navigation.prototype, "urlShouldBe", null);
+__decorate([index_1.then(helpers_1.pattern([/^должен произойти переход (?:на|в) (.*)$/])), __metadata('design:type', Function), __metadata('design:paramtypes', [String]), __metadata('design:returntype', Promise)], Navigation.prototype, "urlshouldbe", null);
 Navigation = __decorate([index_1.binding(), __metadata('design:paramtypes', [])], Navigation);
 module.exports = Navigation;
