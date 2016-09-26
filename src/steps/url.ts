@@ -31,7 +31,7 @@ class UrlStepSet extends StepSet {
     public async addHashParametr(name: string, value: string): Promise<void> {
         const url: URI = await this.getCurrentUrl();
         const hash: string[] = [url.hash(), `${name}=${value}`];
-        url.hash(hash.join(this.hashParams.test(hash[0]) ? '&' : ''));
+        url.hash(hash.join(this.hashParams.test(hash[0]) ? '&' : ''))
         return await this.pushState(url.href());
     }
 
