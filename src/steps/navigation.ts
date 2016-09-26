@@ -46,7 +46,6 @@ class Navigation extends StepSet {
     }
 
     @then(pattern([
-        /^should be a transition to (.*)$/,
         /^должен произойти переход (?:на|в) (.*)$/
     ]))
     public async urlShouldBe(url: string): Promise<string> {

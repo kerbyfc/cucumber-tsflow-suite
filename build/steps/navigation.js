@@ -228,6 +228,6 @@ __decorate([index_1.given(helpers_1.pattern([/^открыт.? (.*)$/])), __metad
 __decorate([index_1.when(helpers_1.pattern([/обновить страницу/])), __metadata('design:type', Function), __metadata('design:paramtypes', []), __metadata('design:returntype', Promise)], Navigation.prototype, "reloadPage", null);
 __decorate([index_1.when(helpers_1.pattern([/^перейти (?:на|в) (.*)$/])), __metadata('design:type', Function), __metadata('design:paramtypes', [String]), __metadata('design:returntype', Promise)], Navigation.prototype, "navigateToPage", null);
 __decorate([index_1.when(helpers_1.pattern([/^дождаться перехода (?:на|в) (.*)$/])), __metadata('design:type', Function), __metadata('design:paramtypes', [String]), __metadata('design:returntype', Promise)], Navigation.prototype, "afterUrlChange", null);
-__decorate([index_1.then(helpers_1.pattern([/^should be a transition to (.*)$/, /^должен произойти переход (?:на|в) (.*)$/])), __metadata('design:type', Function), __metadata('design:paramtypes', [String]), __metadata('design:returntype', Promise)], Navigation.prototype, "urlShouldBe", null);
+__decorate([index_1.then(helpers_1.pattern([/^должен произойти переход (?:на|в) (.*)$/])), __metadata('design:type', Function), __metadata('design:paramtypes', [String]), __metadata('design:returntype', Promise)], Navigation.prototype, "urlShouldBe", null);
 Navigation = __decorate([index_1.binding(), __metadata('design:paramtypes', [])], Navigation);
 module.exports = Navigation;
